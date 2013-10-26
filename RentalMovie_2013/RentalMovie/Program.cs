@@ -113,7 +113,6 @@ namespace RentalMovie
             string result = "Rental Record for " + Name + "\n";
             foreach (Rental each in rentals)
             {
-                double thisAmount = each.getCharge();
                 // レンタルポイントを加算
                 frequentRenterPoints++;
                 // 新作を二日以上借りた場合はボーナスポイント
@@ -121,8 +120,8 @@ namespace RentalMovie
                       each.DaysRented > 1)
                     frequentRenterPoints++;
                 // この貸し出しに対する数値の表示
-                result += "\t" + each.Movie.Title + "\t" + thisAmount.ToString( ) + "\n";
-                totalAmount += thisAmount;
+                result += "\t" + each.Movie.Title + "\t" + each.getCharge( ).ToString( ) + "\n";
+                totalAmount += each.getCharge( );
             }
             // フッタ部分の追加
             result += "Amount owed is " + totalAmount.ToString( ) + "\n";
