@@ -45,8 +45,8 @@ namespace RentalMovie
         private Movie rental_movie;
         private int days_rented;
 
-        private const int GetBounauPoint = 1;
-        private const int NotGetBounauPoint = 0;
+        private const int GetBounauPoint = 2;
+        private const int NotGetBounauPoint = 1;
 
         public Rental(Movie movie, int daysRented)
         {
@@ -118,33 +118,45 @@ namespace RentalMovie
             get { return name; }
         }
 
+        double TotalCharge
+        {
+            get
+            {
+                double totalCharge = 0;
+                foreach (Rental each in rentals)
+                {
+                    totalCharge += each.getCharge( );
+                }
+                return totalCharge;
+            }
+        }
+
+        int TotalFrequentRenterPoints
+        {
+            get
+            {
+                int totalFrequentRenterPoints = 0;
+                foreach (Rental each in rentals)
+                {
+                    // 新作を二日以上借りた場合はボーナスポイント
+                    totalFrequentRenterPoints += each.getFrequentRenterPoints( );
+                }
+                return totalFrequentRenterPoints;
+            }
+        }
+
         public string statement()
         {
-            double totalAmount = 0;
-            int frequentRenterPoints = 0;
             string result = "Rental Record for " + Name + "\n";
             foreach (Rental each in rentals)
             {
-                // レンタルポイントを加算
-                frequentRenterPoints++;
-                // 新作を二日以上借りた場合はボーナスポイント
-                frequentRenterPoints += each.getFrequentRenterPoints();
                 // この貸し出しに対する数値の表示
                 result += "\t" + each.Movie.Title + "\t" + each.getCharge( ).ToString( ) + "\n";
-                totalAmount += each.getCharge( );
             }
             // フッタ部分の追加
-            result += "Amount owed is " + totalAmount.ToString( ) + "\n";
-            result += "You earned " + frequentRenterPoints.ToString( ) + " frequent renter points";
+            result += "Amount owed is " + TotalCharge.ToString( ) + "\n";
+            result += "You earned " + TotalFrequentRenterPoints.ToString( ) + " frequent renter points";
             return result;
-        }
-
-        private static int get_bounus_point(int frequentRenterPoints, Rental each)
-        {
-            if ((each.Movie.PriceCode == Movie.NEW_RELEASE) &&
-                  each.DaysRented > 1)
-                frequentRenterPoints++;
-            return frequentRenterPoints;
         }
     }
 }
