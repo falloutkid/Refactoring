@@ -118,24 +118,7 @@ namespace RentalMovie
             string result = "Rental Record for " + Name + "\n";
             foreach (Rental each in rentals)
             {
-                double thisAmount = 0;
-                // 一行ごとに金額を計算
-                switch (each.Movie.PriceCode)
-                {
-                    case Movie.REGULAR:
-                        thisAmount += 2;
-                        if (each.DaysRented > 2)
-                            thisAmount += (each.DaysRented - 2) * 1.5;
-                        break;
-                    case Movie.NEW_RELEASE:
-                        thisAmount += each.DaysRented * 3;
-                        break;
-                    case Movie.CHILDRENS:
-                        thisAmount += 1.5;
-                        if (each.DaysRented > 3)
-                            thisAmount += (each.DaysRented - 3) * 1.5;
-                        break;
-                }
+                double thisAmount = amountFor(each);
                 // レンタルポイントを加算
                 frequentRenterPoints++;
                 // 新作を二日以上借りた場合はボーナスポイント
