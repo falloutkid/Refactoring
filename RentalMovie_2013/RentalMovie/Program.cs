@@ -45,6 +45,9 @@ namespace RentalMovie
         private Movie rental_movie;
         private int days_rented;
 
+        private const int GetBounauPoint = 1;
+        private const int NotGetBounauPoint = 0;
+
         public Rental(Movie movie, int daysRented)
         {
             rental_movie = movie;
@@ -83,6 +86,15 @@ namespace RentalMovie
             }
             return result;
         }
+
+        public int getFrequentRenterPoints()
+        {
+            if ((rental_movie.PriceCode == Movie.NEW_RELEASE) && (days_rented > 1))
+            {
+                return GetBounauPoint;
+            }
+            return NotGetBounauPoint;
+        }
     }
 
     public class Customer
@@ -116,9 +128,7 @@ namespace RentalMovie
                 // レンタルポイントを加算
                 frequentRenterPoints++;
                 // 新作を二日以上借りた場合はボーナスポイント
-                if ((each.Movie.PriceCode == Movie.NEW_RELEASE) &&
-                      each.DaysRented > 1)
-                    frequentRenterPoints++;
+                frequentRenterPoints += each.getFrequentRenterPoints();
                 // この貸し出しに対する数値の表示
                 result += "\t" + each.Movie.Title + "\t" + each.getCharge( ).ToString( ) + "\n";
                 totalAmount += each.getCharge( );
@@ -127,6 +137,14 @@ namespace RentalMovie
             result += "Amount owed is " + totalAmount.ToString( ) + "\n";
             result += "You earned " + frequentRenterPoints.ToString( ) + " frequent renter points";
             return result;
+        }
+
+        private static int get_bounus_point(int frequentRenterPoints, Rental each)
+        {
+            if ((each.Movie.PriceCode == Movie.NEW_RELEASE) &&
+                  each.DaysRented > 1)
+                frequentRenterPoints++;
+            return frequentRenterPoints;
         }
     }
 }
