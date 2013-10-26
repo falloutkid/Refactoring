@@ -60,6 +60,29 @@ namespace RentalMovie
         {
             get { return rental_movie; }
         }
+
+        public double getCharge()
+        {
+            double result = 0;
+            // 一行ごとに金額を計算
+            switch (rental_movie.PriceCode)
+            {
+                case Movie.REGULAR:
+                    result += 2;
+                    if (days_rented > 2)
+                        result += (days_rented - 2) * 1.5;
+                    break;
+                case Movie.NEW_RELEASE:
+                    result += days_rented * 3;
+                    break;
+                case Movie.CHILDRENS:
+                    result += 1.5;
+                    if (days_rented > 3)
+                        result += (days_rented - 3) * 1.5;
+                    break;
+            }
+            return result;
+        }
     }
 
     public class Customer
@@ -83,34 +106,6 @@ namespace RentalMovie
             get { return name; }
         }
 
-        public double AmoutFor(Rental each)
-        {
-            return amountFor(each);
-        }
-
-        private double amountFor(Rental rental_movie)
-        {
-            double result = 0;
-            // 一行ごとに金額を計算
-            switch (rental_movie.Movie.PriceCode)
-            {
-                case Movie.REGULAR:
-                    result += 2;
-                    if (rental_movie.DaysRented > 2)
-                        result += (rental_movie.DaysRented - 2) * 1.5;
-                    break;
-                case Movie.NEW_RELEASE:
-                    result += rental_movie.DaysRented * 3;
-                    break;
-                case Movie.CHILDRENS:
-                    result += 1.5;
-                    if (rental_movie.DaysRented > 3)
-                        result += (rental_movie.DaysRented - 3) * 1.5;
-                    break;
-            }
-            return result;
-        }
-
         public string statement()
         {
             double totalAmount = 0;
@@ -118,7 +113,7 @@ namespace RentalMovie
             string result = "Rental Record for " + Name + "\n";
             foreach (Rental each in rentals)
             {
-                double thisAmount = amountFor(each);
+                double thisAmount = each.getCharge();
                 // レンタルポイントを加算
                 frequentRenterPoints++;
                 // 新作を二日以上借りた場合はボーナスポイント

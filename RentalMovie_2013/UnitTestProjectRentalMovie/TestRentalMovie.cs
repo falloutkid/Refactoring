@@ -32,7 +32,7 @@ namespace TestRentalMovie
             expect += "Amount owed is 15" + "\nYou earned " + frequentRenterPoints.ToString() + " frequent renter points";
             Assert.AreEqual(expect, result, "Wrong!! expect[{0}] result[{1}]", expect, result);
         }
-
+        /*
         [TestCase(1, Movie.REGULAR, 2.0)]
         [TestCase(3, Movie.REGULAR, 3.5)]
         [TestCase(1, Movie.NEW_RELEASE, 3.0)]
@@ -45,7 +45,24 @@ namespace TestRentalMovie
             Rental rental_input = new Rental(movie_input, days);
 
             Customer customer = new Customer("taro");
-            double result = customer.AmoutFor(rental_input);
+            double result = customer.amountFor(rental_input);
+
+            Assert.AreEqual(expect, result, "Error:Expect[{0}] Result[{1}]", expect, result);
+        }
+         */
+
+        [TestCase(1, Movie.REGULAR, 2.0)]
+        [TestCase(3, Movie.REGULAR, 3.5)]
+        [TestCase(1, Movie.NEW_RELEASE, 3.0)]
+        [TestCase(3, Movie.NEW_RELEASE, 9.0)]
+        [TestCase(1, Movie.CHILDRENS, 1.5)]
+        [TestCase(4, Movie.CHILDRENS, 3.0)]
+        public void TestgetCharge(int days, int price_code, double expect)
+        {
+            Movie movie_input = new Movie("sample", price_code);
+            Rental rental_input = new Rental(movie_input, days);
+
+            double result = rental_input.getCharge();
 
             Assert.AreEqual(expect, result, "Error:Expect[{0}] Result[{1}]", expect, result);
         }
