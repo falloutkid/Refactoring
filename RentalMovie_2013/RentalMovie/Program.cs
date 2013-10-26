@@ -88,27 +88,27 @@ namespace RentalMovie
             return amountFor(each);
         }
 
-        private double amountFor(Rental each)
+        private double amountFor(Rental rental_movie)
         {
-            double thisAmount = 0;
+            double result = 0;
             // 一行ごとに金額を計算
-            switch (each.Movie.PriceCode)
+            switch (rental_movie.Movie.PriceCode)
             {
                 case Movie.REGULAR:
-                    thisAmount += 2;
-                    if (each.DaysRented > 2)
-                        thisAmount += (each.DaysRented - 2) * 1.5;
+                    result += 2;
+                    if (rental_movie.DaysRented > 2)
+                        result += (rental_movie.DaysRented - 2) * 1.5;
                     break;
                 case Movie.NEW_RELEASE:
-                    thisAmount += each.DaysRented * 3;
+                    result += rental_movie.DaysRented * 3;
                     break;
                 case Movie.CHILDRENS:
-                    thisAmount += 1.5;
-                    if (each.DaysRented > 3)
-                        thisAmount += (each.DaysRented - 3) * 1.5;
+                    result += 1.5;
+                    if (rental_movie.DaysRented > 3)
+                        result += (rental_movie.DaysRented - 3) * 1.5;
                     break;
             }
-            return thisAmount;
+            return result;
         }
 
         public string statement()
