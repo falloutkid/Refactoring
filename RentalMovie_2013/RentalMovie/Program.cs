@@ -8,10 +8,105 @@ namespace RentalMovie
 {
     class Program
     {
+        /// <summary>
+        /// テスト用のランナーメソッド
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
+            Movie movie1 = new Movie("ハリー・ポッターと賢者の石", Movie.REGULAR);
+            Movie movie2 = new Movie("ピングーと愉快ななかまたち", Movie.CHILDRENS);
+            Movie movie3 = new Movie("ハリー・ポッターと秘密の部屋", Movie.NEW_RELEASE);
+
+            Customer customer = new Customer("田中真紀子");
+            customer.addRental(new Rental(movie1, 3));
+            customer.addRental(new Rental(movie2, 4));
+            customer.addRental(new Rental(movie3, 5));
+
+            System.Console.WriteLine(customer.statement( ));
+            System.Console.WriteLine("Please hit key.");
+            Console.ReadKey( );
         }
     }
+
+    #region Priceのタイプコード
+    abstract class Price
+    {
+        protected const int GetBounauPoint = 2;
+        protected const int NotGetBounauPoint = 1;
+        public abstract int getPriceCode();
+        public abstract double getCharge(int days_rented);
+        public abstract int getFrequentRenterPoints(int days_rented);
+    }
+
+    class ChildrenPrice : Price
+    {
+        public override int getPriceCode()
+        {
+            return Movie.CHILDRENS;
+        }
+
+        public override double getCharge(int days_rented)
+        {
+            double result = 1.5;
+            if (days_rented > 3)
+            {
+                result += (days_rented - 3) * 1.5;
+            }
+            return result;
+        }
+
+        public override int getFrequentRenterPoints(int days_rented)
+        {
+            return NotGetBounauPoint;
+        }
+    }
+
+    class RegularPrice : Price
+    {
+        public override int getPriceCode()
+        {
+            return Movie.REGULAR;
+        }
+
+        public override double getCharge(int days_rented)
+        {
+            double result = 2.0;
+            if (days_rented > 2)
+            {
+                result += (days_rented - 2) * 1.5;
+            }
+            return result;
+        }
+
+        public override int getFrequentRenterPoints(int days_rented)
+        {
+            return NotGetBounauPoint;
+        }
+    }
+
+    class NewReleasePrice : Price
+    {
+        public override int getPriceCode()
+        {
+            return Movie.NEW_RELEASE;
+        }
+
+        public override double getCharge(int days_rented)
+        {
+            return (days_rented * 3.0);
+        }
+
+        public override int getFrequentRenterPoints(int days_rented)
+        {
+            if (days_rented > 1)
+            {
+                return GetBounauPoint;
+            }
+            return NotGetBounauPoint;
+        }
+    }
+    #endregion
 
     public class Movie
     {
@@ -20,23 +115,48 @@ namespace RentalMovie
         public const int NEW_RELEASE = 1;
 
         private String movie_title;
-        private int price_code;
+        private Price price;
 
         public Movie(String title, int priceCode)
         {
             movie_title = title;
-            price_code = priceCode;
+            PriceCode = priceCode;
         }
 
         public int PriceCode
         {
-            get { return price_code; }
-            set { price_code = value; }
+            get { return price.getPriceCode(); }
+            set {
+                switch (value)
+                {
+                    case Movie.REGULAR:
+                        price = new RegularPrice( );
+                        break;
+                    case Movie.CHILDRENS:
+                        price = new ChildrenPrice( );
+                        break;
+                    case Movie.NEW_RELEASE:
+                        price = new NewReleasePrice( );
+                        break;
+                    default:
+                        throw new Exception("不正な料金コード" );
+                }
+            }
         }
 
         public string Title
         {
             get { return movie_title; }
+        }
+
+        public double getCharge(int days_rented)
+        {
+            return price.getCharge(days_rented );
+        }
+
+        public int getFrequentRenterPoints(int days_rented)
+        {
+            return price.getFrequentRenterPoints(days_rented);
         }
     }
 
@@ -44,9 +164,6 @@ namespace RentalMovie
     {
         private Movie rental_movie;
         private int days_rented;
-
-        private const int GetBounauPoint = 2;
-        private const int NotGetBounauPoint = 1;
 
         public Rental(Movie movie, int daysRented)
         {
@@ -66,34 +183,12 @@ namespace RentalMovie
 
         public double getCharge()
         {
-            double result = 0;
-            // 一行ごとに金額を計算
-            switch (rental_movie.PriceCode)
-            {
-                case Movie.REGULAR:
-                    result += 2;
-                    if (days_rented > 2)
-                        result += (days_rented - 2) * 1.5;
-                    break;
-                case Movie.NEW_RELEASE:
-                    result += days_rented * 3;
-                    break;
-                case Movie.CHILDRENS:
-                    result += 1.5;
-                    if (days_rented > 3)
-                        result += (days_rented - 3) * 1.5;
-                    break;
-            }
-            return result;
+            return rental_movie.getCharge(days_rented);
         }
 
         public int getFrequentRenterPoints()
         {
-            if ((rental_movie.PriceCode == Movie.NEW_RELEASE) && (days_rented > 1))
-            {
-                return GetBounauPoint;
-            }
-            return NotGetBounauPoint;
+            return rental_movie.getFrequentRenterPoints(days_rented);
         }
     }
 

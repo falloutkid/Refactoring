@@ -60,9 +60,8 @@ namespace TestRentalMovie
         public void TestgetCharge(int days, int price_code, double expect)
         {
             Movie movie_input = new Movie("sample", price_code);
-            Rental rental_input = new Rental(movie_input, days);
 
-            double result = rental_input.getCharge();
+            double result = movie_input.getCharge(days);
 
             Assert.AreEqual(expect, result, "Error:Expect[{0}] Result[{1}]", expect, result);
         }
