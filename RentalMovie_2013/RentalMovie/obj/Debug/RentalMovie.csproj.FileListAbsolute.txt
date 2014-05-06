@@ -1,0 +1,12 @@
+D:\DropBox\study\リファクタリング\SampleCode\RentalMovie\RentalMovie\bin\Debug\RentalMovie.exe.config
+D:\DropBox\study\リファクタリング\SampleCode\RentalMovie\RentalMovie\bin\Debug\RentalMovie.exe
+D:\DropBox\study\リファクタリング\SampleCode\RentalMovie\RentalMovie\bin\Debug\RentalMovie.pdb
+D:\DropBox\study\リファクタリング\SampleCode\RentalMovie\RentalMovie\obj\Debug\RentalMovie.exe
+D:\DropBox\study\リファクタリング\SampleCode\RentalMovie\RentalMovie\obj\Debug\RentalMovie.pdb
+D:\DropBox\study\リファクタリング\SampleCode\RentalMovie\RentalMovie\obj\Debug\RentalMovie.csprojResolveAssemblyReference.cache
+D:\DropBox\study\リファクタリング\SampleCode\RentalMovie_2013\RentalMovie\bin\Debug\RentalMovie.exe.config
+D:\DropBox\study\リファクタリング\SampleCode\RentalMovie_2013\RentalMovie\obj\Debug\RentalMovie.exe
+D:\DropBox\study\リファクタリング\SampleCode\RentalMovie_2013\RentalMovie\obj\Debug\RentalMovie.pdb
+D:\DropBox\study\リファクタリング\SampleCode\RentalMovie_2013\RentalMovie\bin\Debug\RentalMovie.exe
+D:\DropBox\study\リファクタリング\SampleCode\RentalMovie_2013\RentalMovie\bin\Debug\RentalMovie.pdb
+D:\DropBox\study\リファクタリング\SampleCode\RentalMovie_2013\RentalMovie\obj\Debug\RentalMovie.csprojResolveAssemblyReference.cache

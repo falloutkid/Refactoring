@@ -1,0 +1,12 @@
+D:\DropBox\study\リファクタリング\SampleCode\RentalMovie_2013\UnitTestProjectRentalMovie\bin\Debug\UnitTestProjectRentalMovie.dll
+D:\DropBox\study\リファクタリング\SampleCode\RentalMovie_2013\UnitTestProjectRentalMovie\bin\Debug\UnitTestProjectRentalMovie.pdb
+D:\DropBox\study\リファクタリング\SampleCode\RentalMovie_2013\UnitTestProjectRentalMovie\obj\Debug\UnitTestProjectRentalMovie.csprojResolveAssemblyReference.cache
+D:\DropBox\study\リファクタリング\SampleCode\RentalMovie_2013\UnitTestProjectRentalMovie\obj\Debug\UnitTestProjectRentalMovie.dll
+D:\DropBox\study\リファクタリング\SampleCode\RentalMovie_2013\UnitTestProjectRentalMovie\obj\Debug\UnitTestProjectRentalMovie.pdb
+D:\DropBox\study\リファクタリング\SampleCode\RentalMovie_2013\UnitTestProjectRentalMovie\bin\Debug\nunit.framework.dll
+D:\DropBox\study\リファクタリング\SampleCode\RentalMovie_2013\UnitTestProjectRentalMovie\bin\Debug\RentalMovie.exe
+D:\DropBox\study\リファクタリング\SampleCode\RentalMovie_2013\UnitTestProjectRentalMovie\bin\Debug\RentalMovie.pdb
+D:\DropBox\study\リファクタリング\SampleCode\RentalMovie_2013\UnitTestProjectRentalMovie\bin\Debug\nunit.framework.xml
+D:\DropBox\study\リファクタリング\SampleCode\RentalMovie_2013\UnitTestProjectRentalMovie\bin\Debug\nunit-gui-runner.dll
+D:\DropBox\study\リファクタリング\SampleCode\RentalMovie_2013\UnitTestProjectRentalMovie\bin\Debug\nunit.uikit.dll
+D:\DropBox\study\リファクタリング\SampleCode\RentalMovie_2013\UnitTestProjectRentalMovie\bin\Debug\nunit.uiexception.dll
